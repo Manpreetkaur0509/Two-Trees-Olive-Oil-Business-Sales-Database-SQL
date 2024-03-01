@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="F:/Profile improvemnets/Data/oliveoil.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2674"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:mainemployees"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="4.Filtering Data with Multiple Conditions">/* 
+Topic: Filtering Data With Multiple Conditions
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+
+--WHERE: filtering data with the AND operator, part 1
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+WHERE prod_category='Bath Products' and emp_name='Clement Carry'
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the AND operator, part 2
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+where prod_category ='Bath Products'
+		and emp_name='Clement Carry'
+		and quantity&gt;3
+ORDER BY order_total DESC;
+
+
+--WHERE: filtering data with the BETWEEN operator
+SELECT order_num,
+       emp_name,
+       prod_category,
+       quantity,
+       order_total
+FROM sales
+WHERE prod_category = 'Bath Products'
+  AND emp_name = 'Clement Carry'
+  AND QUANTITY BETWEEN 2 AND 4
+ORDER BY order_total DESC;
+
+
+--WHERE: filtering data with the OR operator, part 1
+SELECT order_num,
+       emp_name,
+       prod_category,
+       quantity,
+       order_total
+FROM sales
+WHERE prod_category='Bath Products'
+		OR emp_name='Clement Carry'
+ORDER BY order_total DESC;
+
+
+--WHERE: filtering data with the OR operator, part 2
+SELECT order_num,
+       emp_name,
+       prod_category,
+       quantity,
+       order_total
+FROM sales
+where (prod_category='Bath Products'
+		or emp_name='Clement carry')
+		AND quantity &gt;5
+ORDER BY order_total DESC;</sql><sql name="challenge ques 1">/* 
+Topic: Problem statement- provide report of top 20 orders from Georgia and North Carolina
+		include: 
+				- Order number
+				- Order type
+				- Customer_type
+				- Order total
+How Many these were purchased by Individuals?				
+				
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+ select DISTINCT cust_type
+from sales; 
+  
+SELECT order_num,
+       order_type,
+       cust_type,       
+       order_total
+	   cust_state
+FROM sales
+where cust_state IN('Georgia','North Carolina')  
+ORDER BY order_total DESC
+LIMIT 20;  </sql><sql name="5. Aggregate Function_count">/* 
+Topic: Aggregate Functions
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+
+
+--COUNT: counting orders
+
+Select count(*)
+from sales;
+
+--COUNT: counting gift basket orders
+
+select count(*)
+from sales 
+where prod_category ='Gift Basket' ;
+
+--COUNT, AS: counting customers and using an alias
+
+select count(distinct(cust_id)) as customer_count
+ from sales ;
+
+--AS: using an alias
+select cust_id as client_id
+from sales;</sql><sql name="6.Aggregate_function_Min,max,avg,sum">/* 
+Topic: Aggregate Functions - SUM, AVG , MAX
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+
+--SUM, AVG: total sales and average order value
+
+SELECT SUM(ORDER_TOTAL) AS SUM_OF_ORDERS,
+		AVG(order_total) AS AVG_ORDER
+FROM SALES;
+
+--SUM, AVG: total sales and average order value for business customers
+SELECT SUM(ORDER_TOTAL) AS SUM_OF_ORDERS,
+		AVG(order_total) AS AVG_ORDER
+FROM SALES
+WHERE cust_type='Business';
+
+
+--MIN, MAX: minimum and maximum orders for business customers
+
+SELECT min(ORDER_TOTAL) AS min_ORDERS,
+		max(order_total) AS max_ORDER
+FROM SALES
+WHERE cust_type='Business';</sql><sql name="7.Group by Clause ">/* 
+Topic: Group BY clause
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+
+
+--GROUP BY: grouping data and aggregate functions
+
+Select cust_state,
+		sum(order_total) as sum_of_orders
+FROM sales
+group by cust_state;
+
+-- using group by and order by clause 
+
+Select cust_state,
+		sum(order_total) as sum_of_orders
+FROM sales
+group by cust_state
+order by sum_of_orders DESC;
+
+-- 2nd way 
+--The proper use of aggregate functions and grouping
+ --in SQL can help us analyze and summarize our data in seconds.
+ 
+Select cust_state,
+		sum(order_total) as sum_of_orders,
+		count(*) as order_count,
+		avg (order_total) as avg_order
+FROM sales
+where cust_type='Busines'
+group by cust_state
+order by sum_of_orders DESC;
+
+	</sql><sql name="8. Having Clause">/* 
+Topic: Having Clause
+Owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+
+
+--HAVING: filtering by a group aggregate value
+
+Select cust_state,
+		sum(order_total) as sum_of_orders,
+		count(*) as order_count,
+		avg(order_total) as avg_order
+from sales
+group by cust_state
+having order_count &gt;100
+order by sum_of_orders DESC;
+
+
+Select cust_state,
+		sum(order_total) as sum_of_orders,
+		count(*) as order_count,
+		avg(order_total) as avg_order
+from sales
+group by cust_state
+having avg_order &lt; 200
+order by sum_of_orders DESC;		</sql><current_tab id="5"/></tab_sql></sqlb_project>
