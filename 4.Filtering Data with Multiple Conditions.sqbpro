@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="F:/Personal Projects/sql project db sql lite/LIBRARY MANAGEMENT.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="581"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="0,0:"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="4.Filtering Data with Multiple Conditions">/* 
+Topic: Filtering Data With Multiple Conditions
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+
+--WHERE: filtering data with the AND operator, part 1
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+WHERE prod_category='Bath Products' and emp_name='Clement Carry'
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the AND operator, part 2
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+where prod_category ='Bath Products'
+		and emp_name='Clement Carry'
+		and quantity&gt;3
+ORDER BY order_total DESC;
+
+
+--WHERE: filtering data with the BETWEEN operator
+SELECT order_num,
+       emp_name,
+       prod_category,
+       quantity,
+       order_total
+FROM sales
+WHERE prod_category = 'Bath Products'
+  AND emp_name = 'Clement Carry'
+  AND QUANTITY BETWEEN 2 AND 4
+ORDER BY order_total DESC;
+
+
+--WHERE: filtering data with the OR operator, part 1
+SELECT order_num,
+       emp_name,
+       prod_category,
+       quantity,
+       order_total
+FROM sales
+WHERE prod_category='Bath Products'
+		OR emp_name='Clement Carry'
+ORDER BY order_total DESC;
+
+
+--WHERE: filtering data with the OR operator, part 2
+SELECT order_num,
+       emp_name,
+       prod_category,
+       quantity,
+       order_total
+FROM sales
+where (prod_category='Bath Products'
+		or emp_name='Clement carry')
+		AND quantity &gt;5
+ORDER BY order_total DESC;</sql><current_tab id="0"/></tab_sql></sqlb_project>
