@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="F:/Profile improvemnets/Data/oliveoil.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2674"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:mainemployees"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="employees" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="88"/><column index="2" value="153"/><column index="3" value="214"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="1.Select Statement">/* 
+Getting Started with SQL
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+
+
+--selecting all rows and columns
+select *
+ FROM sales;
+
+
+--selecting specific columns
+
+Select order_num
+		emp_name,
+		prod_category,
+		order_total
+FROM sales;		
+
+--LIMIT: limiting the output to 10 rows
+
+select order_num,
+		emp_name,
+		prod_category,
+		order_total
+From sales
+Limit 10;		
+		
+
+--selecting one column
+
+select prod_category
+from sales;
+
+--DISTINCT: selecting unique values from one column
+
+select DISTINCT  prod_category
+from sales;</sql><sql name="2.Order BY Clause ">/* 
+Topic: Order By CLause
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+  
+ --selecting specific columns
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+Order by prod_category,order_total desc ;
+
+
+
+--top 5 overall orders
+
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+order by order_total DESC
+Limit 5 ;
+
+
+
+</sql><sql name="3. Where Clause">/* 
+Topic: Where CLause
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+  
+
+
+--top 5 overall orders
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the '=' sign
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+WHERE prod_category ='Bath Products'
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the IN operator
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+where prod_category IN ('Bath Products' , 'Gift Basket')
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the '!=' sign
+-- excluding one category
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+where prod_category != 'Olive Oil' 
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the NOT IN operator
+-- excluding more than 1 category 
+
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+where prod_category NOT in ('Olive Oil' , ' Gift Basket')
+ORDER BY order_total DESC
+LIMIT 5;</sql><sql name="SQL 5">/* 
+Topic: Where CLause
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+  
+
+
+--top 5 overall orders
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the '=' sign
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+WHERE prod_category ='Bath Products'
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the IN operator
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+where prod_category IN ('Bath Products' , 'Gift Basket')
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the '!=' sign
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM oliveoil.sales
+
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the NOT IN operator
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM oliveoil.sales
+
+ORDER BY order_total DESC
+LIMIT 5;</sql><current_tab id="2"/></tab_sql></sqlb_project>
