@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="F:/Profile improvemnets/Data/oliveoil.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2674"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:mainemployees"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="4.Filtering Data with Multiple Conditions">/* 
+Topic: Filtering Data With Multiple Conditions
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+
+--WHERE: filtering data with the AND operator, part 1
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+WHERE prod_category='Bath Products' and emp_name='Clement Carry'
+ORDER BY order_total DESC
+LIMIT 5;
+
+
+--WHERE: filtering data with the AND operator, part 2
+SELECT order_num,
+       emp_name,
+       prod_category,
+       order_total
+FROM sales
+where prod_category ='Bath Products'
+		and emp_name='Clement Carry'
+		and quantity&gt;3
+ORDER BY order_total DESC;
+
+
+--WHERE: filtering data with the BETWEEN operator
+SELECT order_num,
+       emp_name,
+       prod_category,
+       quantity,
+       order_total
+FROM sales
+WHERE prod_category = 'Bath Products'
+  AND emp_name = 'Clement Carry'
+  AND QUANTITY BETWEEN 2 AND 4
+ORDER BY order_total DESC;
+
+
+--WHERE: filtering data with the OR operator, part 1
+SELECT order_num,
+       emp_name,
+       prod_category,
+       quantity,
+       order_total
+FROM sales
+WHERE prod_category='Bath Products'
+		OR emp_name='Clement Carry'
+ORDER BY order_total DESC;
+
+
+--WHERE: filtering data with the OR operator, part 2
+SELECT order_num,
+       emp_name,
+       prod_category,
+       quantity,
+       order_total
+FROM sales
+where (prod_category='Bath Products'
+		or emp_name='Clement carry')
+		AND quantity &gt;5
+ORDER BY order_total DESC;</sql><sql name="challenge ques 1">/* 
+Topic: Problem statement- provide report of top 20 orders from Georgia and North Carolina
+		include: 
+				- Order number
+				- Order type
+				- Customer_type
+				- Order total
+How Many these were purchased by Individuals?				
+				
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+ select DISTINCT cust_type
+from sales; 
+  
+SELECT order_num,
+       order_type,
+       cust_type,       
+       order_total
+	   cust_state
+FROM sales
+where cust_state IN('Georgia','North Carolina')  
+ORDER BY order_total DESC
+LIMIT 20;  </sql><sql name="5. Aggregate Function_count">/* 
+Topic: Aggregate Functions
+owner : Manpreet Kaur
+Created on: 29 Feb 2024
+Inspiration: Linkedin Learning
+Credits: Christina Stathopoulos
+Data Whisperer, Analytics Specialist, Public Speaker, and Educator
+https://www.linkedin.com/in/christinastathopoulos/?trk=lil_instructor
+  
+  */
+
+
+--COUNT: counting orders
+
+Select count(*)
+from sales;
+
+--COUNT: counting gift basket orders
+
+select count(*)
+from sales 
+where prod_category ='Gift Basket' ;
+
+--COUNT, AS: counting customers and using an alias
+
+select count(distinct(cust_id)) as customer_count
+ from sales ;
+
+--AS: using an alias
+select cust_id as client_id
+from sales;</sql><current_tab id="1"/></tab_sql></sqlb_project>
